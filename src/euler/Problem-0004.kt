@@ -23,15 +23,3 @@ inline fun Int.isPalindrome(): Boolean {
 }
 
 inline fun Any.toCharList() = toString().sure().toCharArray().iterator().toArrayList()
-
-inline fun IntRange.times(other: IntRange): Iterator<Int> = object: Iterator<Int> {
-  var a = other.start; var it1 = iterator(); var it2 = other.iterator()
-  override val hasNext: Boolean = it1.hasNext
-  override fun next(): Int {
-    val c = a * it2.next()
-    if (!it2.hasNext) {
-      a = it1.next(); it2 = other.iterator()
-    }
-    return c
-  }
-}
