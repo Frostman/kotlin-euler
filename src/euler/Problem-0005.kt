@@ -11,4 +11,4 @@ inline fun leastCommonMultipleOf(range: IntRange): Int {
   return number
 }
 
-inline fun Int.isDivisibleByNumbersIn(range: IntRange) = range all { int % it == 0 }
+inline fun Int.isDivisibleByNumbersIn(range: IntRange) = range all { this % it == 0 }
