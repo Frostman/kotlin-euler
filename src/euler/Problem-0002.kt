@@ -11,7 +11,7 @@ import std.math.plus
 fun main(args : Array<String>) {
   val limit = BigInteger("4000000")
   val numbers = fibonacci().takeWhile { it < limit }.filter { it multipleOf 2 }.toList()
-  println("the sum of even Fibonacci numbers less than $limit, that is sum${numbers} = ${numbers.sum()}")
+  println("the sum of even Fibonacci numbers less than $limit, that is sum$numbers = ${numbers.sum()}")
 }
 
 inline fun fibonacci() = object : Sequence<BigInteger>() {

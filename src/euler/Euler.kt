@@ -6,9 +6,11 @@ import java.util.List
 import std.math.plus
 import std.math.times
 import std.util.fold
+import std.util.map
 
 // candidates for std
 inline fun Any.toCharList() = toString().iterator().toArrayList()
+inline fun Any.toDigits() = toCharList().map { (c: Char) -> Character.getNumericValue(c) }
 
 // candidates for std.math
 inline fun factorial(n: Int, product: BigInteger = BigInteger("1")): BigInteger = if (n == 0) product else factorial(n - 1, n * product)
@@ -22,6 +24,12 @@ inline fun java.lang.Iterable<Float>.sum() = fold(0.toFloat()) { (a: Float, b: F
 inline fun java.lang.Iterable<Double>.sum() = fold(0.toDouble()) { (a: Double, b: Double) -> a + b }
 inline fun java.lang.Iterable<Long>.sum() = fold(0.toLong()) { (a: Long, b: Long) -> a + b }
 inline fun java.lang.Iterable<BigInteger>.sum() = fold(BigInteger("0")) { (a: BigInteger, b: BigInteger) -> a + b }
+
+inline fun java.lang.Iterable<Int>.product() = fold(1) { (a: Int, b: Int) -> a * b }
+inline fun java.lang.Iterable<Float>.product() = fold(1.toFloat()) { (a: Float, b: Float) -> a * b }
+inline fun java.lang.Iterable<Double>.product() = fold(1.toDouble()) { (a: Double, b: Double) -> a * b }
+inline fun java.lang.Iterable<Long>.product() = fold(1.toLong()) { (a: Long, b: Long) -> a * b }
+inline fun java.lang.Iterable<BigInteger>.product() = fold(BigInteger("1")) { (a: BigInteger, b: BigInteger) -> a * b }
 
 inline fun java.lang.Iterable<Int>.max() = fold(0) { (a: Int, b: Int) -> Math.max(a, b) }
 inline fun java.lang.Iterable<Float>.max() = fold(0.toFloat()) { (a: Float, b: Float) -> Math.max(a, b) }
