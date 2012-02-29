@@ -3,6 +3,7 @@ package euler
 import java.math.BigInteger
 import java.util.List
 
+import std.math.plus
 import std.math.times
 import std.util.fold
 
@@ -14,13 +15,13 @@ inline fun factorial(n: Int, product: BigInteger = BigInteger("1")): BigInteger 
 inline fun Int.times(multiplicand: BigInteger) = BigInteger(toString()) * multiplicand
 inline fun Int.multipleOf(n: Int) = this % n == 0
 
-inline fun BigInteger.compareTo(n: Int) = compareTo(BigInteger(n.toString()))
 inline fun BigInteger.multipleOf(n: Int) = this % BigInteger(n.toString()) == BigInteger("0")
 
 inline fun java.lang.Iterable<Int>.sum() = fold(0) { (a: Int, b: Int) -> a + b }
 inline fun java.lang.Iterable<Float>.sum() = fold(0.toFloat()) { (a: Float, b: Float) -> a + b }
 inline fun java.lang.Iterable<Double>.sum() = fold(0.toDouble()) { (a: Double, b: Double) -> a + b }
 inline fun java.lang.Iterable<Long>.sum() = fold(0.toLong()) { (a: Long, b: Long) -> a + b }
+inline fun java.lang.Iterable<BigInteger>.sum() = fold(BigInteger("0")) { (a: BigInteger, b: BigInteger) -> a + b }
 
 inline fun java.lang.Iterable<Int>.max() = fold(0) { (a: Int, b: Int) -> Math.max(a, b) }
 inline fun java.lang.Iterable<Float>.max() = fold(0.toFloat()) { (a: Float, b: Float) -> Math.max(a, b) }
