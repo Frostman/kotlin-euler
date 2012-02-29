@@ -3,10 +3,8 @@ package euler.problem0003
 import euler.max
 import euler.plus
 
-import java.util.Collection
 import java.util.List
 import std.util.arrayList
-import std.util.fold
 
 fun main(args : Array<String>) {
   val n = 600851475143

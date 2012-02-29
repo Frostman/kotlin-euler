@@ -1,7 +1,6 @@
 package euler
 
 import java.math.BigInteger
-import java.util.Collection
 import java.util.List
 
 import std.math.times
@@ -15,15 +14,18 @@ inline fun factorial(n: Int, product: BigInteger = BigInteger("1")): BigInteger 
 inline fun Int.times(multiplicand: BigInteger) = BigInteger(toString()) * multiplicand
 inline fun Int.multipleOf(n: Int) = this % n == 0
 
-inline fun Collection<Int>.sum() = fold(0) { (a: Int, b: Int) -> a + b }
-inline fun Collection<Float>.sum() = fold(0.toFloat()) { (a: Float, b: Float) -> a + b }
-inline fun Collection<Double>.sum() = fold(0.toDouble()) { (a: Double, b: Double) -> a + b }
-inline fun Collection<Long>.sum() = fold(0.toLong()) { (a: Long, b: Long) -> a + b }
+inline fun BigInteger.compareTo(n: Int) = compareTo(BigInteger(n.toString()))
+inline fun BigInteger.multipleOf(n: Int) = this % BigInteger(n.toString()) == BigInteger("0")
 
-inline fun Collection<Int>.max() = fold(0) { (a: Int, b: Int) -> Math.max(a, b) }
-inline fun Collection<Float>.max() = fold(0.toFloat()) { (a: Float, b: Float) -> Math.max(a, b) }
-inline fun Collection<Double>.max() = fold(0.toDouble()) { (a: Double, b: Double) -> Math.max(a, b) }
-inline fun Collection<Long>.max() = fold(0.toLong()) { (a: Long, b: Long) -> Math.max(a, b) }
+inline fun java.lang.Iterable<Int>.sum() = fold(0) { (a: Int, b: Int) -> a + b }
+inline fun java.lang.Iterable<Float>.sum() = fold(0.toFloat()) { (a: Float, b: Float) -> a + b }
+inline fun java.lang.Iterable<Double>.sum() = fold(0.toDouble()) { (a: Double, b: Double) -> a + b }
+inline fun java.lang.Iterable<Long>.sum() = fold(0.toLong()) { (a: Long, b: Long) -> a + b }
+
+inline fun java.lang.Iterable<Int>.max() = fold(0) { (a: Int, b: Int) -> Math.max(a, b) }
+inline fun java.lang.Iterable<Float>.max() = fold(0.toFloat()) { (a: Float, b: Float) -> Math.max(a, b) }
+inline fun java.lang.Iterable<Double>.max() = fold(0.toDouble()) { (a: Double, b: Double) -> Math.max(a, b) }
+inline fun java.lang.Iterable<Long>.max() = fold(0.toLong()) { (a: Long, b: Long) -> Math.max(a, b) }
 
 // candidates for std.util
 inline fun <T> T.plus(list: List<T>): List<T> {

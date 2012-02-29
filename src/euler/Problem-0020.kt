@@ -5,8 +5,6 @@ import euler.sum
 import euler.toCharList
 
 import java.math.BigInteger
-import java.util.Collection
-import std.util.fold
 import std.util.map
 
 fun main(args : Array<String>) {
