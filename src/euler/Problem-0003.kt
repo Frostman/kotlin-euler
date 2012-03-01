@@ -2,7 +2,9 @@ package euler.problem0003
 
 import euler.max
 import euler.plus
+import euler.smallestPrimeFactor
 
+import java.math.BigInteger
 import java.util.List
 import std.util.arrayList
 
@@ -12,8 +14,7 @@ fun main(args : Array<String>) {
   println("the largest prime factor of $n is max$primeFactors = ${primeFactors.max()}")
 }
 
-// primes -> factor: n % it == 0 -> max
 inline fun primeFactors(n: Long): List<Long> {
-  val smallestPrimeFactor = 2.toLong()..Math.sqrt(n.toDouble()).toLong() find { n % it == 0.toLong() }
-  return if (smallestPrimeFactor == null) arrayList(n.toLong()) else smallestPrimeFactor + primeFactors(n / smallestPrimeFactor)
+  val primeFactor = n.smallestPrimeFactor()
+  return if (primeFactor == null) arrayList(n.toLong()) else primeFactor + primeFactors(n / primeFactor)
 }
