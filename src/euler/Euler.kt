@@ -12,6 +12,11 @@ import std.util.map
 inline fun Any.toCharList() = toString().iterator().toArrayList()
 inline fun Any.toDigits() = toCharList().map { (c: Char) -> Character.getNumericValue(c) }
 
+inline fun Iterable<Int>.findTriplet(predicate: (Int, Int, Int) -> Boolean): #(Int, Int, Int)? {
+  for (a in this) for (b in this) for (c in this) if ((predicate)(a, b, c)) return #(a, b, c)
+  return null
+}
+
 // candidates for std.math
 inline fun factorial(n: Int, product: BigInteger = BigInteger("1")): BigInteger = if (n == 0) product else factorial(n - 1, n * product)
 inline fun Int.times(multiplicand: BigInteger) = BigInteger(toString()) * multiplicand
