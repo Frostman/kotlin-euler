@@ -44,6 +44,12 @@ inline fun java.lang.Iterable<Double>.max() = fold(0.toDouble()) { (a: Double, b
 inline fun java.lang.Iterable<Long>.max() = fold(0.toLong()) { (a: Long, b: Long) -> Math.max(a, b) }
 
 // add to JetIterables.kt
+inline fun Iterable<Int>.sum() = fold(0) { (a: Int, b: Int) -> a + b }
+inline fun Iterable<Float>.sum() = fold(0.toFloat()) { (a: Float, b: Float) -> a + b }
+inline fun Iterable<Double>.sum() = fold(0.toDouble()) { (a: Double, b: Double) -> a + b }
+inline fun Iterable<Long>.sum() = fold(0.toLong()) { (a: Long, b: Long) -> a + b }
+inline fun Iterable<BigInteger>.sum() = fold(BigInteger("0")) { (a: BigInteger, b: BigInteger) -> a + b }
+
 inline fun Iterable<Int>.max() = fold(0) { (a: Int, b: Int) -> Math.max(a, b) }
 inline fun Iterable<Float>.max() = fold(0.toFloat()) { (a: Float, b: Float) -> Math.max(a, b) }
 inline fun Iterable<Double>.max() = fold(0.toDouble()) { (a: Double, b: Double) -> Math.max(a, b) }
