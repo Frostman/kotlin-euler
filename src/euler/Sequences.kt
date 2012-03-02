@@ -1,7 +1,6 @@
 package euler.sequence
 
 import euler.isPrime
-import java.math.BigInteger
 
 inline fun <T> sequence(vararg elements: T) = object : Sequence<T>() {
   val iterator: Iterator<T> = elements.iterator()
@@ -21,6 +20,22 @@ inline fun primes() = object : Sequence<Long>() {
   }
 
   override fun iterator(): Iterator<Long> = YieldingIterator { nextPrime() }
+}
+
+inline fun <T> Iterable<T>.pairs(range: Iterable<T> = this) = object : Sequence<#(T, T)>() {
+  val first = range.iterator(); var second = range.iterator(); var a: T? = null
+
+  fun nextPair(): #(T, T)? {
+    if (a == null && first.hasNext) a = first.next()
+    if (second.hasNext) return #(a.sure(), second.next())
+    if (first.hasNext) {
+      a = null; second = range.iterator()
+      return nextPair()
+    }
+    return null
+  }
+
+  override fun iterator(): Iterator<#(T, T)> = YieldingIterator { nextPair() }
 }
 
 inline fun String.grouped(size: Int, iterator: CharIterator = iterator()) = object : Sequence<String>() {

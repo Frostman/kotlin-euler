@@ -6,7 +6,7 @@ abstract class Sequence<T> : Iterable<T> {
     val iterator = iterator()
 
     return object : Sequence<T>() {
-      fun filter(): T? {
+      fun next(): T? {
         while (iterator.hasNext) {
           val item = iterator.next()
           if ((predicate)(item)) return item
@@ -14,7 +14,17 @@ abstract class Sequence<T> : Iterable<T> {
         return null
       }
 
-      override fun iterator(): Iterator<T> = YieldingIterator { filter() }
+      override fun iterator(): Iterator<T> = YieldingIterator { next() }
+    }
+  }
+
+  fun <R> map(transform: (T) -> R): Sequence<R> {
+    val iterator = iterator()
+
+    return object : Sequence<R>() {
+      fun next(): R? = if (iterator.hasNext) (transform)(iterator.next()) else null
+
+      override fun iterator(): Iterator<R> = YieldingIterator { next() }
     }
   }
 
@@ -30,7 +40,7 @@ abstract class Sequence<T> : Iterable<T> {
     val iterator = iterator()
 
     return object : Sequence<T>() {
-      fun takeWhile(): T? {
+      fun next(): T? {
         if (iterator.hasNext) {
           val item = iterator.next()
           if ((predicate)(item)) return item
@@ -38,7 +48,7 @@ abstract class Sequence<T> : Iterable<T> {
         return null
       }
 
-      override fun iterator(): Iterator<T> = YieldingIterator { takeWhile() }
+      override fun iterator(): Iterator<T> = YieldingIterator { next() }
     }
   }
 }

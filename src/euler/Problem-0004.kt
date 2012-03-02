@@ -1,21 +1,20 @@
 package euler.problem0004
 
+import euler.fold
 import euler.toCharList
+import euler.sequence.pairs
+import euler.sequence.Sequence
+
 import std.util.reverse
 
 fun main(args : Array<String>) {
-  var max = 0; var multiplier = 0; var multiplicand = 0
+  val result = (100..999).palindromes().max()
+  // until labeled tuples are supported - see http://youtrack.jetbrains.com/issue/KT-1433
+  val multiplier = result._1; val multiplicand = result._2; val product = result._3
 
-  for (a in 100..999) {
-    for (b in 100..999) {
-      val product = a * b
-      if (product.isPalindrome() && product > max) { // palindrome and maximum are orthogonal concerns to iterating
-        max = product; multiplier = a; multiplicand = b
-      }
-    }
-  }
-
-  println("the largest palindrome made from the product of two 3-digit numbers is $multiplier x $multiplicand = $max")
+  println("the largest palindrome made from the product of two 3-digit numbers is $multiplier x $multiplicand = $product")
 }
 
+inline fun Iterable<Int>.palindromes() = pairs() as Sequence<#(Int, Int)> map { #(it._1, it._2, it._1 * it._2) } filter { it._3.isPalindrome() }
 inline fun Int.isPalindrome() = toCharList() == toCharList().reverse()
+inline fun Sequence<#(Int, Int, Int)>.max() = fold(#(0, 0, 0)) { (a: #(Int, Int, Int), b: #(Int, Int, Int)) -> if (Math.max(a._3, b._3) == a._3) a else b }

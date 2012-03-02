@@ -1,11 +1,9 @@
 package euler.problem0008
 
-import euler.max
+import euler.fold
 import euler.product
 import euler.toDigits
 import euler.sequence.sliding
-
-import java.util.Collection
 
 fun main(args : Array<String>) {
   val size = 5
@@ -31,6 +29,8 @@ fun main(args : Array<String>) {
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
 """
-  val products = digits.sliding(size).map { (consecutiveDigits: String) -> consecutiveDigits.toDigits().product() }
-  println("the largest product of $size consecutive digits is ${products.max()} in:\n$digits")
+  val result = (digits.sliding(size) map { (window: String) -> #(window, window.toDigits().product()) }).max()
+  println("the largest product of $size consecutive digits ${result._1.toDigits()} is ${result._2} in:\n$digits")
 }
+
+inline fun Iterable<#(String, Int)>.max() = fold(#("", 0)) { (a: #(String, Int), b: #(String, Int)) -> if (Math.max(a._2, b._2) == a._2) a else b }
