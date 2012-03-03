@@ -30,7 +30,7 @@ inline fun fibonacci() = object : Sequence<BigInteger>() {
 }
 
 inline fun fibonacciWithIndices() = object : Sequence<#(Int, BigInteger)>() {
-  var a = #(0, BigInteger("0")); var b = #(1, BigInteger("1"))
+  var a = #(0, BigInteger(0)); var b = #(1, BigInteger(1))
 
   fun nextFibonacci(): #(Int, BigInteger) {
     val result = #(b._1 + 1, a._2 + b._2); a = b; b = result
