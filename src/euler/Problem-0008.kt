@@ -30,7 +30,7 @@ fun main(args : Array<String>) {
 71636269561882670428252483600823257530420752963450
 """
   val result = (digits.sliding(size) map { (window: String) -> #(window, window.toDigits().product()) }).max()
-  println("the largest product of $size consecutive digits ${result._1.toDigits()} is ${result._2} in:\n$digits")
+  print("the largest product of $size consecutive digits ${result._1.toDigits()} is ${result._2} in:\n$digits")
 }
 
 inline fun Iterable<#(String, Int)>.max() = fold(#("", 0)) { (a: #(String, Int), b: #(String, Int)) -> if (Math.max(a._2, b._2) == a._2) a else b }
