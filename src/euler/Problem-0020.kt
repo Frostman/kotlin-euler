@@ -4,9 +4,6 @@ import euler.factorial
 import euler.sum
 import euler.toDigits
 
-import java.math.BigInteger
-import std.util.map
-
 fun main(args : Array<String>) {
   val n = 100
   val result = factorial(n)

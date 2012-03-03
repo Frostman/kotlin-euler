@@ -5,7 +5,6 @@ import euler.sum
 import euler.sequence.fibonacci
 
 import java.math.BigInteger
-import std.math.plus
 
 fun main(args : Array<String>) {
   val limit = BigInteger("4000000")

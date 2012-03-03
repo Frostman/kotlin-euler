@@ -4,7 +4,6 @@ import euler.max
 import euler.plus
 import euler.smallestPrimeFactor
 
-import java.math.BigInteger
 import java.util.List
 import std.util.arrayList
 
