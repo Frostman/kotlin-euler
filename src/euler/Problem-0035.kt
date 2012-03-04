@@ -1,7 +1,7 @@
 package euler.problem0035
 
 import euler.isPrime
-import euler.permutations
+import euler.rotations
 import euler.toCharList
 import euler.sequence.primes
 
@@ -14,4 +14,4 @@ fun main(args : Array<String>) {
   println("the ${result.size()} circular primes below $limit are $result")
 }
 
-inline fun Long.isCircularPrime() = toCharList().permutations().all { Long.parseLong(it.join("")).isPrime() }
+inline fun Long.isCircularPrime() = toCharList().rotations().all { Long.parseLong(it.join("")).isPrime() }

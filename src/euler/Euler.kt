@@ -2,6 +2,7 @@ package euler
 
 import java.math.BigInteger
 import java.util.ArrayList
+import java.util.LinkedList
 import java.util.List
 
 import std.math.plus
@@ -80,6 +81,16 @@ inline fun <T> List<T>.permutations(): List<List<T>> {
     for (head in this) for (permutation in (this - head).permutations()) result.add(head + permutation)
     return result
   }
+}
+
+inline fun <T> List<T>.rotations(): List<List<T>> {
+  val result = arrayList<List<T>>(this)
+  val linkedList = LinkedList(this)
+  for (count in 2..size()) {
+    linkedList.addLast(linkedList.removeFirst())
+    result.add(ArrayList(linkedList))
+  }
+  return result
 }
 
 inline fun <T> T.plus(list: List<T>): List<T> {
