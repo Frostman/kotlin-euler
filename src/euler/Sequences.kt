@@ -40,6 +40,15 @@ inline fun fibonacciWithIndices() = object : Sequence<#(Int, BigInteger)>() {
   override fun iterator(): Iterator<#(Int, BigInteger)> = YieldingIterator { nextFibonacci() }
 }
 
+inline fun triangles() = object : Sequence<#(Int, Int)>() {
+  var n = 0; var sum = 0
+  fun nextTriangle(): #(Int, Int) {
+    sum += ++n
+    return #(n, sum)
+  }
+  override fun iterator(): Iterator<#(Int, Int)> = YieldingIterator { nextTriangle() }
+}
+
 inline fun <T> Iterable<T>.pairs(range: Iterable<T> = this) = object : Sequence<#(T, T)>() {
   val first = range.iterator(); var second = range.iterator(); var a: T? = null
 

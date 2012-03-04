@@ -7,8 +7,10 @@ import java.util.List
 
 import std.math.plus
 import std.math.times
+
 import std.util.arrayList
 import std.util.fold
+import std.util.groupBy
 import std.util.map
 
 // candidates for std
@@ -24,7 +26,18 @@ inline fun Int.isPrime() = smallestPrimeFactor() == null
 inline fun Long.isPrime() = smallestPrimeFactor() == null
 
 inline fun Int.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toInt() find { this % it == 0 }
-inline fun Long.smallestPrimeFactor() = 2.toLong()..Math.sqrt(toDouble()).toLong() find { this % it == 0.toLong() }
+inline fun Long.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toLong() find { this % it == 0.toLong() }
+
+inline fun primeFactors(n: Long): List<Long> {
+  val primeFactor = n.smallestPrimeFactor()
+  return if (primeFactor == null) arrayList(n) else primeFactor + primeFactors(n / primeFactor)
+}
+
+inline fun Int.numberOfDivisors(): Int = toLong().numberOfDivisors()
+
+inline fun Long.numberOfDivisors(): Int {
+  return primeFactors(this).groupBy { it }.values().map { (group: List<Long>) -> group.size() + 1 }.product()
+}
 
 inline fun BigInteger.multipleOf(n: Int) = this % BigInteger(n.toString()) == BigInteger(0)
 
