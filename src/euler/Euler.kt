@@ -1,10 +1,12 @@
 package euler
 
 import java.math.BigInteger
+import java.util.ArrayList
 import java.util.List
 
 import std.math.plus
 import std.math.times
+import std.util.arrayList
 import std.util.fold
 import std.util.map
 
@@ -72,7 +74,22 @@ inline fun <T> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): #(T, T,
 }
 
 // candidates for std.util
+inline fun <T> List<T>.permutations(): List<List<T>> {
+  return if (isEmpty()) arrayList(this) else {
+    val result = ArrayList<List<T>>()
+    for (head in this) for (permutation in (this - head).permutations()) result.add(head + permutation)
+    return result
+  }
+}
+
 inline fun <T> T.plus(list: List<T>): List<T> {
-  list.add(0, this)
-  return list
+  val copy = ArrayList(list)
+  copy.add(0, this)
+  return copy
+}
+
+inline fun <T> List<T>.minus(element: T): List<T> {
+  val copy = ArrayList(this)
+  copy.remove(element)
+  return copy
 }
