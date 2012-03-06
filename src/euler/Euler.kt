@@ -20,26 +20,25 @@ inline fun Any.toDigits() = toCharList().map { (c: Char) -> Character.getNumeric
 // candidates for std.math
 inline fun factorial(n: Int, product: BigInteger = BigInteger("1")): BigInteger = if (n == 0) product else factorial(n - 1, n * product)
 inline fun Int.times(multiplicand: BigInteger) = BigInteger(toString()) * multiplicand
+
 inline fun Int.multipleOf(n: Int) = this % n == 0
+inline fun BigInteger.multipleOf(n: Int) = this % BigInteger(n.toString()) == BigInteger("0")
 
-inline fun Int.isPrime() = smallestPrimeFactor() == null
-inline fun Long.isPrime() = smallestPrimeFactor() == null
+inline fun Int.isPrime() = toLong().isPrime()
+inline fun Long.isPrime() = this > 1 && smallestPrimeFactor() == null
 
-inline fun Int.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toInt() find { this % it == 0 }
-inline fun Long.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toLong() find { this % it == 0.toLong() }
+inline fun Int.numberOfDivisors(): Int = toLong().numberOfDivisors()
+inline fun Long.numberOfDivisors(): Int {
+  return primeFactors(this).groupBy { it }.values().map { (group: List<Long>) -> group.size() + 1 }.product()
+}
 
 inline fun primeFactors(n: Long): List<Long> {
   val primeFactor = n.smallestPrimeFactor()
   return if (primeFactor == null) arrayList(n) else primeFactor + primeFactors(n / primeFactor)
 }
 
-inline fun Int.numberOfDivisors(): Int = toLong().numberOfDivisors()
-
-inline fun Long.numberOfDivisors(): Int {
-  return primeFactors(this).groupBy { it }.values().map { (group: List<Long>) -> group.size() + 1 }.product()
-}
-
-inline fun BigInteger.multipleOf(n: Int) = this % BigInteger(n.toString()) == BigInteger("0")
+inline fun Int.smallestPrimeFactor() = toLong().smallestPrimeFactor()?.toInt()
+inline fun Long.smallestPrimeFactor() = 2..Math.sqrt(toDouble()).toLong() find { this % it == 0.toLong() }
 
 // add to JavaIterablesSpecial.kt
 inline fun java.lang.Iterable<Int>.sum() = fold(0) { (a: Int, b: Int) -> a + b }

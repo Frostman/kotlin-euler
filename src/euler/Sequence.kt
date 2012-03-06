@@ -65,6 +65,6 @@ class YieldingIterator<T>(val yield: () -> T?) : Iterator<T> {
       current = (yield)()
       return next
     }
-    else throw java.util.NoSuchElementException()
+    throw java.util.NoSuchElementException()
   }
 }
