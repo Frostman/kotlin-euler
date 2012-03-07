@@ -1,11 +1,9 @@
 package euler.problem0004
 
 import euler.fold
-import euler.toCharList
+import euler.isPalindrome
 import euler.sequence.pairs
 import euler.sequence.Sequence
-
-import std.util.reverse
 
 fun main(args : Array<String>) {
   val result = (100..999).palindromes().max()
@@ -16,5 +14,4 @@ fun main(args : Array<String>) {
 }
 
 inline fun Iterable<Int>.palindromes() = pairs() as Sequence<#(Int, Int)> map { #(it._1, it._2, it._1 * it._2) } filter { it._3.isPalindrome() }
-inline fun Int.isPalindrome() = toCharList() == toCharList().reverse()
 inline fun Sequence<#(Int, Int, Int)>.max() = fold(#(0, 0, 0)) { (a: #(Int, Int, Int), b: #(Int, Int, Int)) -> if (Math.max(a._3, b._3) == a._3) a else b }

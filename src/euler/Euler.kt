@@ -12,10 +12,12 @@ import std.util.arrayList
 import std.util.fold
 import std.util.groupBy
 import std.util.map
+import std.util.reverse
 
 // candidates for std
 inline fun Any.toCharList() = toString().iterator().toArrayList()
 inline fun Any.toDigits() = toCharList().map { (c: Char) -> Character.getNumericValue(c) }
+inline fun Any.isPalindrome() = toCharList() == toCharList().reverse()
 
 // candidates for std.math
 inline fun factorial(n: Int, product: BigInteger = BigInteger("1")): BigInteger = if (n == 0) product else factorial(n - 1, n * product)
