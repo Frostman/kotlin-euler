@@ -23,7 +23,8 @@ inline fun Any.isPalindrome() = toCharList() == toCharList().reverse()
 inline fun factorial(n: Int, product: BigInteger = BigInteger("1")): BigInteger = if (n == 0) product else factorial(n - 1, n * product)
 inline fun Int.times(multiplicand: BigInteger) = BigInteger(toString()) * multiplicand
 
-inline fun Int.multipleOf(n: Int) = this % n == 0
+inline fun Int.multipleOf(n: Int) = toLong() multipleOf n
+inline fun Long.multipleOf(n: Int) = this % n == 0.toLong()
 inline fun BigInteger.multipleOf(n: Int) = this % BigInteger(n.toString()) == BigInteger("0")
 
 inline fun Int.isPrime() = toLong().isPrime()

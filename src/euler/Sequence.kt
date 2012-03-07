@@ -18,6 +18,12 @@ abstract class Sequence<T> : Iterable<T> {
     }
   }
 
+  fun fold(accumulator: T, transform: (T, T) -> T): T {
+    var result = accumulator
+    for (item in this) result = (transform)(result, item)
+    return result
+  }
+
   fun <R> map(transform: (T) -> R): Sequence<R> {
     val iterator = iterator()
 
