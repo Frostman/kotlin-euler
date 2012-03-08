@@ -4,15 +4,12 @@ import euler.isPrime
 import java.math.BigInteger
 import std.math.plus
 
-inline fun <T> sequence(vararg elements: T) = object : Sequence<T>() {
+inline fun <T> sequence(vararg elements: T): Sequence<T> {
   val iterator: Iterator<T> = elements.iterator()
-
-  fun nextElement(): T? = if (iterator.hasNext) iterator.next() else null
-
-  override fun iterator(): Iterator<T> = YieldingIterator { nextElement() }
+  return Sequence<T> { if (iterator.hasNext) iterator.next() else null }
 }
 
-inline fun primes() = object : Sequence<Long>() {
+inline fun primes(): Sequence<Long> {
   var number = 2.toLong()
 
   fun nextPrime(): Long {
@@ -21,15 +18,15 @@ inline fun primes() = object : Sequence<Long>() {
     return result
   }
 
-  override fun iterator(): Iterator<Long> = YieldingIterator { nextPrime() }
+  return Sequence<Long> { nextPrime() }
 }
 
-inline fun fibonacci() = object : Sequence<BigInteger>() {
+inline fun fibonacci(): Sequence<BigInteger> {
   val iterator: Iterator<#(Int, BigInteger)> = fibonacciWithIndices().iterator()
-  override fun iterator(): Iterator<BigInteger> = YieldingIterator { iterator.next()._2 }
+  return Sequence<BigInteger> { iterator.next()._2 }
 }
 
-inline fun fibonacciWithIndices() = object : Sequence<#(Int, BigInteger)>() {
+inline fun fibonacciWithIndices(): Sequence<#(Int, BigInteger)> {
   var a = #(0, BigInteger("0")); var b = #(1, BigInteger("1"))
 
   fun nextFibonacci(): #(Int, BigInteger) {
@@ -37,35 +34,37 @@ inline fun fibonacciWithIndices() = object : Sequence<#(Int, BigInteger)>() {
     return result
   }
 
-  override fun iterator(): Iterator<#(Int, BigInteger)> = YieldingIterator { nextFibonacci() }
+  return Sequence<#(Int, BigInteger)> { nextFibonacci() }
 }
 
-inline fun triangles() = object : Sequence<#(Int, Int)>() {
+inline fun triangles(): Sequence<#(Int, Int)> {
   var n = 0; var sum = 0
+
   fun nextTriangle(): #(Int, Int) {
     sum += ++n
     return #(n, sum)
   }
-  override fun iterator(): Iterator<#(Int, Int)> = YieldingIterator { nextTriangle() }
+
+  return Sequence<#(Int, Int)> { nextTriangle() }
 }
 
-inline fun <T> Iterable<T>.pairs(range: Iterable<T> = this) = object : Sequence<#(T, T)>() {
+inline fun <T> Iterable<T>.pairs(range: Iterable<T> = this): Sequence<#(T, T)> {
   val first = range.iterator(); var second = range.iterator(); var a: T? = null
 
   fun nextPair(): #(T, T)? {
     if (a == null && first.hasNext) a = first.next()
     if (second.hasNext) return #(a.sure(), second.next())
     if (first.hasNext) {
-      a = null; second = range.iterator()
-      return nextPair()
+      a = first.next(); second = range.iterator()
+      return #(a.sure(), second.next())
     }
     return null
   }
 
-  override fun iterator(): Iterator<#(T, T)> = YieldingIterator { nextPair() }
+  return Sequence<#(T, T)> { nextPair() }
 }
 
-inline fun String.grouped(size: Int, iterator: CharIterator = iterator()) = object : Sequence<String>() {
+inline fun String.grouped(size: Int, iterator: CharIterator = iterator()): Sequence<String> {
   fun nextGroup(): String? {
     if (iterator.hasNext) {
       val window = StringBuilder()
@@ -74,10 +73,11 @@ inline fun String.grouped(size: Int, iterator: CharIterator = iterator()) = obje
     }
     return null
   }
-  override fun iterator(): Iterator<String> = YieldingIterator { nextGroup() }
+
+  return Sequence<String> { nextGroup() }
 }
 
-inline fun String.sliding(size: Int, iterator: CharIterator = iterator()) = object : Sequence<String>() {
+inline fun String.sliding(size: Int, iterator: CharIterator = iterator()): Sequence<String> {
   val window = StringBuilder()
 
   fun nextWindow(): String? {
@@ -88,5 +88,5 @@ inline fun String.sliding(size: Int, iterator: CharIterator = iterator()) = obje
     return if (iterator.hasNext) window.deleteCharAt(0)?.append(iterator.next()).toString() else null
   }
 
-  override fun iterator(): Iterator<String> = YieldingIterator { nextWindow() }
+  return Sequence<String> { nextWindow() }
 }

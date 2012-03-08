@@ -1,21 +1,21 @@
 package euler.sequence
 
-abstract class Sequence<T> : Iterable<T> {
+class Sequence<T>(val next: () -> T?) : Iterable<T> {
+
+  override fun iterator(): Iterator<T> = YieldingIterator { (next)() }
 
   fun filter(predicate: (T) -> Boolean): Sequence<T> {
     val iterator = iterator()
 
-    return object : Sequence<T>() {
-      fun next(): T? {
-        while (iterator.hasNext) {
-          val item = iterator.next()
-          if ((predicate)(item)) return item
-        }
-        return null
+    fun next(): T? {
+      while (iterator.hasNext) {
+        val item = iterator.next()
+        if ((predicate)(item)) return item
       }
-
-      override fun iterator(): Iterator<T> = YieldingIterator { next() }
+      return null
     }
+
+    return Sequence<T> { next() }
   }
 
   fun fold(accumulator: T, transform: (T, T) -> T): T {
@@ -26,16 +26,12 @@ abstract class Sequence<T> : Iterable<T> {
 
   fun <R> map(transform: (T) -> R): Sequence<R> {
     val iterator = iterator()
-
-    return object : Sequence<R>() {
-      fun next(): R? = if (iterator.hasNext) (transform)(iterator.next()) else null
-
-      override fun iterator(): Iterator<R> = YieldingIterator { next() }
-    }
+    fun next(): R? = if (iterator.hasNext) (transform)(iterator.next()) else null
+    return Sequence<R> { next() }
   }
 
   fun take(n: Int): Sequence<T> {
-    fun countTo(n: Int): (Any) -> Boolean {
+    fun countTo(n: Int): (T) -> Boolean {
       var count = 0
       return { ++count; count <= n }
     }
@@ -45,21 +41,19 @@ abstract class Sequence<T> : Iterable<T> {
   fun takeWhile(predicate: (T) -> Boolean): Sequence<T> {
     val iterator = iterator()
 
-    return object : Sequence<T>() {
-      fun next(): T? {
-        if (iterator.hasNext) {
-          val item = iterator.next()
-          if ((predicate)(item)) return item
-        }
-        return null
+    fun next(): T? {
+      if (iterator.hasNext) {
+        val item = iterator.next()
+        if ((predicate)(item)) return item
       }
-
-      override fun iterator(): Iterator<T> = YieldingIterator { next() }
+      return null
     }
+
+    return Sequence<T> { next() }
   }
 }
 
-class YieldingIterator<T>(val yield: () -> T?) : Iterator<T> {
+private class YieldingIterator<T>(val yield: () -> T?) : Iterator<T> {
   var current : T? = (yield)()
 
   override val hasNext: Boolean

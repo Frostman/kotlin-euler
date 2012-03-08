@@ -4,7 +4,6 @@ import euler.isPrime
 import euler.sum
 import euler.sequence.primes
 import euler.sequence.Sequence
-import euler.sequence.YieldingIterator
 
 fun main(args : Array<String>) {
   val limit = 11
@@ -19,7 +18,7 @@ inline fun String.truncateLeft() = truncate(this) { it.substring(1) }
 inline fun String.truncateRight() = truncate(this) { it.substring(0, it.length() - 1) }
 inline fun Iterable<String>.allPrimes() = all { Long.parseLong(it).isPrime() }
 
-inline fun truncate(var string: String, reduce: (String) -> String) = object : Sequence<String>() {
+inline fun truncate(var string: String, reduce: (String) -> String): Sequence<String> {
   var current: String? = string
 
   fun nextString(): String? {
@@ -28,5 +27,5 @@ inline fun truncate(var string: String, reduce: (String) -> String) = object : S
     return current
   }
 
-  override fun iterator(): Iterator<String> = YieldingIterator { nextString() }
+  return Sequence<String> { nextString() }
 }
