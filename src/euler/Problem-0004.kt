@@ -1,6 +1,5 @@
 package euler.problem0004
 
-import euler.fold
 import euler.isPalindrome
 import euler.sequence.pairs
 import euler.sequence.Sequence

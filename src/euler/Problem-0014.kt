@@ -6,8 +6,8 @@ import euler.plus
 import java.util.Collection
 import java.util.List
 
-import std.util.arrayList
-import std.util.fold
+import kotlin.util.arrayList
+import kotlin.util.fold
 
 fun main(args : Array<String>) {
   val limit = 1000000

@@ -1,7 +1,7 @@
 package euler.problem0006
 
 import euler.sum
-import std.util.fold
+import kotlin.util.fold
 
 fun main(args : Array<String>) {
   val start = 1; val end = 100; val range = start..end

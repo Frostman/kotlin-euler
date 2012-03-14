@@ -2,7 +2,7 @@ package euler.sequence
 
 import euler.isPrime
 import java.math.BigInteger
-import std.math.plus
+import kotlin.math.plus
 
 inline fun <T> sequence(vararg elements: T): Sequence<T> {
   val iterator: Iterator<T> = elements.iterator()

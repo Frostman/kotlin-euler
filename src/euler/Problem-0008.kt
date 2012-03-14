@@ -1,6 +1,5 @@
 package euler.problem0008
 
-import euler.fold
 import euler.product
 import euler.toDigits
 import euler.sequence.sliding

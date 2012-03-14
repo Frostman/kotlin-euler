@@ -5,21 +5,21 @@ import java.util.ArrayList
 import java.util.LinkedList
 import java.util.List
 
-import std.math.plus
-import std.math.times
+import kotlin.math.plus
+import kotlin.math.times
 
-import std.util.arrayList
-import std.util.fold
-import std.util.groupBy
-import std.util.map
-import std.util.reverse
+import kotlin.util.arrayList
+import kotlin.util.fold
+import kotlin.util.groupBy
+import kotlin.util.map
+import kotlin.util.reverse
 
-// candidates for std
+// candidates for kotlin
 inline fun Any.toCharList() = toString().iterator().toArrayList()
 inline fun Any.toDigits() = toCharList().map { (c: Char) -> Character.getNumericValue(c) }
 inline fun Any.isPalindrome() = toCharList() == toCharList().reverse()
 
-// candidates for std.math
+// candidates for kotlin.math
 inline fun factorial(n: Int, product: BigInteger = BigInteger("1")): BigInteger = if (n == 0) product else factorial(n - 1, n * product)
 inline fun Int.times(multiplicand: BigInteger) = BigInteger(toString()) * multiplicand
 
@@ -73,12 +73,6 @@ inline fun Iterable<Float>.max() = fold(0.toFloat()) { (a: Float, b: Float) -> M
 inline fun Iterable<Double>.max() = fold(0.toDouble()) { (a: Double, b: Double) -> Math.max(a, b) }
 inline fun Iterable<Long>.max() = fold(0.toLong()) { (a: Long, b: Long) -> Math.max(a, b) }
 
-inline fun <T> Iterable<T>.fold(seed: T, lambda: (a: T, b: T) -> T): T {
-  var accumulator = seed; val iterator = iterator()
-  while (iterator.hasNext) accumulator = (lambda)(accumulator, iterator.next())
-  return accumulator
-}
-
 inline fun <T> Iterable<T>.findPair(predicate: (T, T) -> Boolean): #(T, T)? {
   for (a in this) for (b in this) if ((predicate)(a, b)) return #(a, b)
   return null
@@ -89,7 +83,7 @@ inline fun <T> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): #(T, T,
   return null
 }
 
-// candidates for std.util
+// candidates for kotlin.util
 inline fun <T> List<T>.permutations(): List<List<T>> {
   return if (isEmpty()) arrayList(this) else {
     val result = ArrayList<List<T>>()

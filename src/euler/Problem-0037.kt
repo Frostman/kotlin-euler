@@ -19,7 +19,7 @@ inline fun String.truncateRight() = truncate(this) { it.substring(0, it.length()
 inline fun Iterable<String>.allPrimes() = all { Long.parseLong(it).isPrime() }
 
 inline fun truncate(var string: String, reduce: (String) -> String): Sequence<String> {
-  var current: String? = string
+  var current: String?
 
   fun nextString(): String? {
     current = string

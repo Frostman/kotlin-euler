@@ -5,8 +5,8 @@ import euler.rotations
 import euler.toCharList
 import euler.sequence.primes
 
-import std.util.all
-import std.util.join
+import kotlin.util.all
+import kotlin.util.join
 
 fun main(args : Array<String>) {
   val limit = 1000000
