@@ -3,7 +3,7 @@ package euler.problem0037
 import euler.isPrime
 import euler.sum
 import euler.sequence.primes
-import euler.sequence.Sequence
+import kotlin.sequences.Sequence
 
 fun main(args : Array<String>) {
   val limit = 11

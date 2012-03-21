@@ -2,7 +2,7 @@ package euler.problem0008
 
 import euler.product
 import euler.toDigits
-import euler.sequence.sliding
+import kotlin.sequences.sliding
 
 fun main(args : Array<String>) {
   val size = 5

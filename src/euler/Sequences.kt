@@ -3,11 +3,7 @@ package euler.sequence
 import euler.isPrime
 import java.math.BigInteger
 import kotlin.math.plus
-
-inline fun <T> sequence(vararg elements: T): Sequence<T> {
-  val iterator: Iterator<T> = elements.iterator()
-  return Sequence<T> { if (iterator.hasNext) iterator.next() else null }
-}
+import kotlin.sequences.Sequence
 
 inline fun primes(): Sequence<Long> {
   var number = 2.toLong()
@@ -46,47 +42,4 @@ inline fun triangles(): Sequence<#(Int, Int)> {
   }
 
   return Sequence<#(Int, Int)> { nextTriangle() }
-}
-
-inline fun <T> Iterable<T>.pairs(range: Iterable<T> = this): Sequence<#(T, T)> {
-  val first = range.iterator(); var second = range.iterator(); var a: T? = null
-
-  fun nextPair(): #(T, T)? {
-    if (a == null && first.hasNext) a = first.next()
-    if (second.hasNext) return #(a.sure(), second.next())
-    if (first.hasNext) {
-      a = first.next(); second = range.iterator()
-      return #(a.sure(), second.next())
-    }
-    return null
-  }
-
-  return Sequence<#(T, T)> { nextPair() }
-}
-
-inline fun String.grouped(size: Int, iterator: CharIterator = iterator()): Sequence<String> {
-  fun nextGroup(): String? {
-    if (iterator.hasNext) {
-      val window = StringBuilder()
-      for (i in 1..size) if (iterator.hasNext) window.append(iterator.next())
-      return window.toString()
-    }
-    return null
-  }
-
-  return Sequence<String> { nextGroup() }
-}
-
-inline fun String.sliding(size: Int, iterator: CharIterator = iterator()): Sequence<String> {
-  val window = StringBuilder()
-
-  fun nextWindow(): String? {
-    if (window.length() == 0) {
-      for (i in 1..size) if (iterator.hasNext) window.append(iterator.next())
-      return window.toString()
-    }
-    return if (iterator.hasNext) window.deleteCharAt(0)?.append(iterator.next()).toString() else null
-  }
-
-  return Sequence<String> { nextWindow() }
 }

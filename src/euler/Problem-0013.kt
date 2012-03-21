@@ -1,7 +1,7 @@
 package euler.problem0013
 
 import euler.sum
-import euler.sequence.grouped
+import kotlin.sequences.grouped
 
 import java.math.BigInteger
 

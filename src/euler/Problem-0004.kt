@@ -1,8 +1,8 @@
 package euler.problem0004
 
 import euler.isPalindrome
-import euler.sequence.pairs
-import euler.sequence.Sequence
+import kotlin.sequences.times
+import kotlin.sequences.Sequence
 
 fun main(args : Array<String>) {
   val result = (100..999).palindromes().max()
@@ -12,7 +12,7 @@ fun main(args : Array<String>) {
   println("the largest palindrome made from the product of two 3-digit numbers is $multiplier x $multiplicand = $product")
 }
 
-inline fun Iterable<Int>.palindromes() = pairs() map { #(it._1, it._2, it._1 * it._2) } filter { it._3.isPalindrome() }
+inline fun Iterable<Int>.palindromes() = (this * this) map { #(it._1, it._2, it._1 * it._2) } filter { it._3.isPalindrome() }
 
 inline fun Sequence<#(Int, Int, Int)>.max() = fold(#(0, 0, 0)) { (a: #(Int, Int, Int), b: #(Int, Int, Int)) ->
   if (Math.max(a._3, b._3) == a._3) a else b
