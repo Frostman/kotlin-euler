@@ -1,7 +1,0 @@
-Solutions to Euler problems require:
-
-- latest build of IDEA 11.1 (EAP)
-http://confluence.jetbrains.net/display/IDEADEV/IDEA+11.1+EAP
-
-- build #0.1.1882 (or above) of the Kotlin plugin for IDEA
-http://teamcity.jetbrains.com/viewType.html?buildTypeId=bt345
