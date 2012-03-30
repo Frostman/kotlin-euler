@@ -2,7 +2,7 @@ package euler.problem0002
 
 import euler.multipleOf
 import euler.sum
-import euler.sequence.fibonacci
+import euler.iterators.fibonacci
 
 import java.math.BigInteger
 

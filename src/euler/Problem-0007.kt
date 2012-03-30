@@ -1,7 +1,6 @@
 package euler.problem0007
 
-import euler.sequence.primes
-import kotlin.util.last
+import euler.iterators.primes
 
 fun main(args : Array<String>) {
   val n = 10001

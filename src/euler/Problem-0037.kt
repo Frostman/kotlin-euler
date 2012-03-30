@@ -2,8 +2,9 @@ package euler.problem0037
 
 import euler.isPrime
 import euler.sum
-import euler.sequence.primes
-import kotlin.sequences.Sequence
+import euler.iterators.primes
+
+import java.util.Iterator
 
 fun main(args : Array<String>) {
   val limit = 11
@@ -16,9 +17,9 @@ inline fun Long.isLeftTruncatablePrime() = toString().truncateLeft().allPrimes()
 inline fun Long.isRightTruncatablePrime() = toString().truncateRight().allPrimes()
 inline fun String.truncateLeft() = truncate(this) { it.substring(1) }
 inline fun String.truncateRight() = truncate(this) { it.substring(0, it.length() - 1) }
-inline fun Iterable<String>.allPrimes() = all { Long.parseLong(it).isPrime() }
+inline fun Iterator<String>.allPrimes() = all { Long.parseLong(it).isPrime() }
 
-inline fun truncate(var string: String, reduce: (String) -> String): Sequence<String> {
+inline fun truncate(var string: String, reduce: (String) -> String): Iterator<String> {
   var current: String?
 
   fun nextString(): String? {
@@ -27,5 +28,5 @@ inline fun truncate(var string: String, reduce: (String) -> String): Sequence<St
     return current
   }
 
-  return Sequence<String> { nextString() }
+  return iterate<String> { nextString() }
 }

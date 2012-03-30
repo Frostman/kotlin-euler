@@ -1,7 +1,7 @@
 package euler.problem0010
 
 import euler.sum
-import euler.sequence.primes
+import euler.iterators.primes
 
 fun main(args : Array<String>) {
   val limit = 2000000

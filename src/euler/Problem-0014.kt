@@ -6,9 +6,6 @@ import euler.plus
 import java.util.Collection
 import java.util.List
 
-import kotlin.util.arrayList
-import kotlin.util.fold
-
 fun main(args : Array<String>) {
   val limit = 1000000
   val result = (1..limit).map { (n: Int) -> #(n, lengthOfSequence(n.toLong())) }.max()

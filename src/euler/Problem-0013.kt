@@ -1,7 +1,7 @@
 package euler.problem0013
 
 import euler.sum
-import kotlin.sequences.grouped
+import euler.iterators.grouped
 
 import java.math.BigInteger
 
@@ -109,6 +109,6 @@ fun main(args : Array<String>) {
 53503534226472524250874054075591789781264330331690
 """
   val size = 50
-  val sum = (digits.replaceAll("\\s", "").grouped(size) map { (window: String) -> BigInteger(window) }).sum().toString()
+  val sum = (digits.replaceAll("\\s", "").grouped(size).map { (window: String) -> BigInteger(window) }).sum().toString()
   print("the first ten digits of the sum of the one-hundred $size-digit numbers is ${sum?.substring(0, 10)} from $sum:\n$digits")
 }

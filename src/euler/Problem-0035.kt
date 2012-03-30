@@ -3,10 +3,7 @@ package euler.problem0035
 import euler.isPrime
 import euler.rotations
 import euler.toCharList
-import euler.sequence.primes
-
-import kotlin.util.all
-import kotlin.util.join
+import euler.iterators.primes
 
 fun main(args : Array<String>) {
   val limit = 1000000

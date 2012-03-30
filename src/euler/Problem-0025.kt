@@ -1,6 +1,6 @@
 package euler.problem0025
 
-import euler.sequence.fibonacciWithIndices
+import euler.iterators.fibonacciWithIndices
 
 fun main(args : Array<String>) {
   val size = 1000

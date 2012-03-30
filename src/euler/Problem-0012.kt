@@ -1,7 +1,7 @@
 package euler.problem0012
 
 import euler.numberOfDivisors
-import euler.sequence.triangles
+import euler.iterators.triangles
 
 fun main(args : Array<String>) {
   val threshold = 500

@@ -2,7 +2,6 @@ package euler.problem0048
 
 import java.math.BigInteger
 import kotlin.math.plus
-import kotlin.util.fold
 
 fun main(args : Array<String>) {
   val limit = 1000
