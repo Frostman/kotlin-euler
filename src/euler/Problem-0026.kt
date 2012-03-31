@@ -1,7 +1,6 @@
 package euler.problem0026
 
 import euler.bigInt
-import euler.max
 import euler.iterators.primes
 
 fun main(args : Array<String>) {
