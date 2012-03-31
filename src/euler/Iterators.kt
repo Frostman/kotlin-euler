@@ -1,5 +1,6 @@
 package euler.iterators
 
+import euler.bigInt
 import euler.isPrime
 
 import java.math.BigInteger
@@ -25,7 +26,7 @@ fun fibonacci(): Iterator<BigInteger> {
 }
 
 fun fibonacciWithIndices(): Iterator<#(Int, BigInteger)> {
-  var a = #(0, BigInteger("0")); var b = #(1, BigInteger("1"))
+  var a = #(0, bigInt(0)); var b = #(1, bigInt(1))
 
   fun nextFibonacci(): #(Int, BigInteger) {
     val result = #(b._1 + 1, a._2 + b._2); a = b; b = result

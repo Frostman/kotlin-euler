@@ -16,7 +16,7 @@ fun lengthOfSequence(n: Long, length: Int = 0): Int {
   return if (n == 1.toLong()) length + 1 else lengthOfSequence(if (n multipleOf 2) (n / 2) else (3 * n + 1), length + 1)
 }
 
-inline fun Collection<#(Int, Int)>.max() = fold(#(0, 0)) { (a: #(Int, Int), b: #(Int, Int)) -> if (a._2 > b._2) a else b }
+inline fun java.lang.Iterable<#(Int, Int)>.max() = fold(#(0, 0)) { (a: #(Int, Int), b: #(Int, Int)) -> if (a._2 > b._2) a else b }
 
 inline fun sequence(n: Long): List<Long> {
   if (n == 1.toLong()) return arrayList(n)
