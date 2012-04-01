@@ -21,7 +21,7 @@ fun primes(): Iterator<Long> {
 }
 
 fun fibonacci(): Iterator<BigInteger> {
-  val iterator: Iterator<#(Int, BigInteger)> = fibonacciWithIndices().iterator()
+  val iterator = fibonacciWithIndices().iterator()
   return iterate<BigInteger> { iterator.next()._2 }
 }
 
@@ -51,7 +51,7 @@ fun triangles(): Iterator<#(Int, Int)> {
  * Produces the [cartesian product](http://en.wikipedia.org/wiki/Cartesian_product#n-ary_product) as a sequence of ordered pairs of elements lazily obtained
  * from two [[Iterable]] instances
  */
-fun <T> Iterable<T>.times(other: Iterable<T>): Iterator<#(T, T)> {
+fun <T: Any> Iterable<T>.times(other: Iterable<T>): Iterator<#(T, T)> {
   val first = iterator(); var second = other.iterator(); var a: T? = null
 
   fun nextPair(): #(T, T)? {
@@ -72,7 +72,9 @@ fun <T> Iterable<T>.times(other: Iterable<T>): Iterator<#(T, T)> {
  *
  * *size* the number of characters per group
  */
-fun String.grouped(size: Int, iterator: CharIterator = iterator()): Iterator<String> {
+fun String.grouped(size: Int): Iterator<String> {
+  val iterator = iterator()
+
   fun nextGroup(): String? {
     if (iterator.hasNext) {
       val window = StringBuilder()
@@ -91,7 +93,8 @@ fun String.grouped(size: Int, iterator: CharIterator = iterator()): Iterator<Str
  *
  * *size* the number of characters per group
  */
-fun String.sliding(size: Int, iterator: CharIterator = iterator()): Iterator<String> {
+fun String.sliding(size: Int): Iterator<String> {
+  val iterator = iterator()
   val window = StringBuilder()
 
   fun nextWindow(): String? {
