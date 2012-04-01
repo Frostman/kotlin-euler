@@ -95,18 +95,18 @@ inline fun Iterable<Float>.max() = fold(0.toFloat()) { (a: Float, b: Float) -> M
 inline fun Iterable<Double>.max() = fold(0.toDouble()) { (a: Double, b: Double) -> Math.max(a, b) }
 inline fun Iterable<Long>.max() = fold(0.toLong()) { (a: Long, b: Long) -> Math.max(a, b) }
 
-inline fun <T> Iterable<T>.findPair(predicate: (T, T) -> Boolean): #(T, T)? {
+inline fun <T: Any> Iterable<T>.findPair(predicate: (T, T) -> Boolean): #(T, T)? {
   for (a in this) for (b in this) if ((predicate)(a, b)) return #(a, b)
   return null
 }
 
-inline fun <T> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): #(T, T, T)? {
+inline fun <T: Any> Iterable<T>.findTriplet(predicate: (T, T, T) -> Boolean): #(T, T, T)? {
   for (a in this) for (b in this) for (c in this) if ((predicate)(a, b, c)) return #(a, b, c)
   return null
 }
 
 // candidates for kotlin.util
-inline fun <T> List<T>.permutations(): List<List<T>> {
+inline fun <T: Any> List<T>.permutations(): List<List<T>> {
   return if (isEmpty()) arrayList(this) else {
     val result = ArrayList<List<T>>()
     for (head in this) for (permutation in (this - head).permutations()) result.add(head + permutation)
@@ -114,7 +114,7 @@ inline fun <T> List<T>.permutations(): List<List<T>> {
   }
 }
 
-inline fun <T> List<T>.rotations(): List<List<T>> {
+inline fun <T: Any> List<T>.rotations(): List<List<T>> {
   val result = arrayList<List<T>>(this)
   val linkedList = LinkedList(this)
   for (count in 2..size()) {
@@ -124,13 +124,13 @@ inline fun <T> List<T>.rotations(): List<List<T>> {
   return result
 }
 
-inline fun <T> T.plus(list: List<T>): List<T> {
+inline fun <T: Any> T.plus(list: List<T>): List<T> {
   val copy = ArrayList(list)
   copy.add(0, this)
   return copy
 }
 
-inline fun <T> List<T>.minus(element: T): List<T> {
+inline fun <T: Any> List<T>.minus(element: T): List<T> {
   val copy = ArrayList(this)
   copy.remove(element)
   return copy
