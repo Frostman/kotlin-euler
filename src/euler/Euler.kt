@@ -54,11 +54,11 @@ inline fun java.util.Iterator<Double>.sum() = fold(0.toDouble()) { (a, b) -> a +
 inline fun java.util.Iterator<Long>.sum() = fold(0.toLong()) { (a, b) -> a + b }
 inline fun java.util.Iterator<BigInteger>.sum() = fold(bigInt(0)) { (a, b) -> a + b }
 
-inline fun Iterable<Int>.sum() = fold(0) { (a: Int, b: Int) -> a + b }
-inline fun Iterable<Float>.sum() = fold(0.toFloat()) { (a: Float, b: Float) -> a + b }
-inline fun Iterable<Double>.sum() = fold(0.toDouble()) { (a: Double, b: Double) -> a + b }
+inline fun Iterable<Int>.sum() = fold(0) { (a, b: Int) -> a + b }
+inline fun Iterable<Float>.sum() = fold(0.toFloat()) { (a, b: Float) -> a + b }
+inline fun Iterable<Double>.sum() = fold(0.toDouble()) { (a, b: Double) -> a + b }
 inline fun Iterable<Long>.sum() = fold(0.toLong()) { (a, b: Long) -> a + b }
-inline fun Iterable<BigInteger>.sum() = fold(bigInt(0)) { (a: BigInteger, b: BigInteger) -> a + b }
+inline fun Iterable<BigInteger>.sum() = fold(bigInt(0)) { (a, b: BigInteger) -> a + b }
 
 // product
 inline fun java.lang.Iterable<Int>.product() = fold(1) { (a, b) -> a * b }
@@ -73,11 +73,11 @@ inline fun java.util.Iterator<Double>.product() = fold(1.toDouble()) { (a, b) ->
 inline fun java.util.Iterator<Long>.product() = fold(1.toLong()) { (a, b) -> a * b }
 inline fun java.util.Iterator<BigInteger>.product() = fold(bigInt(1)) { (a, b) -> a * b }
 
-inline fun Iterable<Int>.product() = fold(1) { (a: Int, b: Int) -> a * b }
-inline fun Iterable<Float>.product() = fold(1.toFloat()) { (a: Float, b: Float) -> a * b }
-inline fun Iterable<Double>.product() = fold(1.toDouble()) { (a: Double, b: Double) -> a * b }
-inline fun Iterable<Long>.product() = fold(1.toLong()) { (a: Long, b: Long) -> a * b }
-inline fun Iterable<BigInteger>.product() = fold(bigInt(1)) { (a: BigInteger, b: BigInteger) -> a * b }
+inline fun Iterable<Int>.product() = fold(1) { (a, b: Int) -> a * b }
+inline fun Iterable<Float>.product() = fold(1.toFloat()) { (a, b: Float) -> a * b }
+inline fun Iterable<Double>.product() = fold(1.toDouble()) { (a, b: Double) -> a * b }
+inline fun Iterable<Long>.product() = fold(1.toLong()) { (a, b: Long) -> a * b }
+inline fun Iterable<BigInteger>.product() = fold(bigInt(1)) { (a, b: BigInteger) -> a * b }
 
 // max
 inline fun java.lang.Iterable<Int>.max() = fold(0) { (a, b) -> Math.max(a, b) }
@@ -90,10 +90,10 @@ inline fun java.util.Iterator<Float>.max() = fold(0.toFloat()) { (a, b) -> Math.
 inline fun java.util.Iterator<Double>.max() = fold(0.toDouble()) { (a, b) -> Math.max(a, b) }
 inline fun java.util.Iterator<Long>.max() = fold(0.toLong()) { (a, b) -> Math.max(a, b) }
 
-inline fun Iterable<Int>.max() = fold(0) { (a: Int, b: Int) -> Math.max(a, b) }
-inline fun Iterable<Float>.max() = fold(0.toFloat()) { (a: Float, b: Float) -> Math.max(a, b) }
-inline fun Iterable<Double>.max() = fold(0.toDouble()) { (a: Double, b: Double) -> Math.max(a, b) }
-inline fun Iterable<Long>.max() = fold(0.toLong()) { (a: Long, b: Long) -> Math.max(a, b) }
+inline fun Iterable<Int>.max() = fold(0) { (a, b: Int) -> Math.max(a, b) }
+inline fun Iterable<Float>.max() = fold(0.toFloat()) { (a, b: Float) -> Math.max(a, b) }
+inline fun Iterable<Double>.max() = fold(0.toDouble()) { (a, b: Double) -> Math.max(a, b) }
+inline fun Iterable<Long>.max() = fold(0.toLong()) { (a, b: Long) -> Math.max(a, b) }
 
 inline fun <T: Any> Iterable<T>.findPair(predicate: (T, T) -> Boolean): #(T, T)? {
   for (a in this) for (b in this) if ((predicate)(a, b)) return #(a, b)
