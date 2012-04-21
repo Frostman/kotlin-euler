@@ -15,4 +15,4 @@ fun main(args : Array<String>) {
   println("the value of d < $limit for which 1/d contains the longest recurring cycle in its decimal fraction part is ${result._1} which has a period of ${result._2}")
 }
 
-inline fun java.util.Iterator<#(Long, Int)>.max() = fold(#(0.toLong(), 0)) { (a: #(Long, Int), b: #(Long, Int)) -> if (a._2 > b._2) a else b }
+inline fun java.util.Iterator<#(Long, Int)>.max() = fold(#(0.toLong(), 0)) { (a, b) -> if (a._2 > b._2) a else b }

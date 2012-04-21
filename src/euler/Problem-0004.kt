@@ -15,6 +15,4 @@ fun main(args : Array<String>) {
 
 inline fun Iterable<Int>.palindromes() = (this * this).map { #(it._1, it._2, it._1 * it._2) as #(Int, Int, Int) }.filter { it._3.isPalindrome() }
 
-inline fun Iterator<#(Int, Int, Int)>.max() = fold(#(0, 0, 0)) { (a: #(Int, Int, Int), b: #(Int, Int, Int)) ->
-  if (Math.max(a._3, b._3) == a._3) a else b
-}
+inline fun Iterator<#(Int, Int, Int)>.max() = fold(#(0, 0, 0)) { (a, b) -> if (Math.max(a._3, b._3) == a._3) a else b }
