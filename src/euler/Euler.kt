@@ -117,7 +117,7 @@ inline fun <T: Any> List<T>.permutations(): List<List<T>> {
 inline fun <T: Any> List<T>.rotations(): List<List<T>> {
   val result = arrayList<List<T>>(this)
   val linkedList = LinkedList(this)
-  for (count in 2..size()) {
+  2..size() forEach {
     linkedList.addLast(linkedList.removeFirst())
     result.add(ArrayList(linkedList))
   }

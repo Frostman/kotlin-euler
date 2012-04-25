@@ -8,7 +8,7 @@ fun main(args : Array<String>) {
 
   // see http://en.wikipedia.org/wiki/Repeating_decimal#Fractions_with_prime_denominators
   val result = primes().takeWhile { it < limit }.map { (d : Long) ->
-    val period = (1..limit).find { bigInt(10).modPow(bigInt(it), bigInt(d)) == bigInt(1) }
+    val period = 1..limit find { bigInt(10).modPow(bigInt(it), bigInt(d)) == bigInt(1) }
     if (period != null) #(d, period.sure()) else #(d, 1)
   }.max()
 

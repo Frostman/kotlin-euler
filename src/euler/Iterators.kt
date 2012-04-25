@@ -78,7 +78,7 @@ fun String.grouped(size: Int): Iterator<String> {
   fun nextGroup(): String? {
     if (iterator.hasNext) {
       val window = StringBuilder()
-      for (i in 1..size) if (iterator.hasNext) window.append(iterator.next())
+      1..size forEach { if (iterator.hasNext) window.append(iterator.next()) }
       return window.toString()
     }
     return null
@@ -99,7 +99,7 @@ fun String.sliding(size: Int): Iterator<String> {
 
   fun nextWindow(): String? {
     if (window.length() == 0) {
-      for (i in 1..size) if (iterator.hasNext) window.append(iterator.next())
+      1..size forEach { if (iterator.hasNext) window.append(iterator.next()) }
       return window.toString()
     }
     return if (iterator.hasNext) window.deleteCharAt(0)?.append(iterator.next()).toString() else null
