@@ -8,7 +8,10 @@ import java.util.Iterator
 
 fun main(args : Array<String>) {
   val limit = 11
+
+  // average execution time of 1.7214 seconds over 10 iterations
   val result = primes().takeWhile { it < 1000000 }.filter { it.isTruncatablePrime() }.take(limit).toList()
+
   println("the sum of the only $limit truncatable primes is sum$result = ${result.sum()}")
 }
 

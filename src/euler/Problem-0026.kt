@@ -11,6 +11,7 @@ fun main(args : Array<String>) {
     val period = 1..limit find { bigInt(10).modPow(bigInt(it), bigInt(d)) == bigInt(1) }
     if (period != null) #(d, period.sure()) else #(d, 1)
   }.max()
+  // average execution time of 48.5923 milliseconds over 10 iterations
 
   println("the value of d < $limit for which 1/d contains the longest recurring cycle in its decimal fraction part is ${result._1} which has a period of ${result._2}")
 }

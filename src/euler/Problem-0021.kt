@@ -4,6 +4,7 @@ import euler.sum
 
 fun main(args : Array<String>) {
   val limit = 10000
+  // average execution time of 596.9915 milliseconds over 10 iterations
   val amicableNumbers = 1..limit filter { it.hasAmicablePair() }
   println("the sum of all the amicable numbers under $limit is sum$amicableNumbers = ${amicableNumbers.sum()}")
 }

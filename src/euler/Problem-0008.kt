@@ -30,6 +30,7 @@ fun main(args : Array<String>) {
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
 """
+  // average execution time of 2.6081 milliseconds over 10 iterations
   val result = digits.sliding(size).map { (window: String) -> #(window, window.toDigits().product()) }.max()
   print("the largest product of $size consecutive digits ${result._1.toDigits()} is ${result._2} in:\n$digits")
 }

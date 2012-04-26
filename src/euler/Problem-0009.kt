@@ -4,7 +4,10 @@ import euler.findTriplet
 
 fun main(args : Array<String>) {
   val sum = 1000
+
+  // average execution time of 2.4315 seconds over 10 iterations
   val triplet = pythagoreanTripletAddingUpTo(sum)
+
   // until labeled tuples are supported - see http://youtrack.jetbrains.com/issue/KT-1433
   val a = triplet._1; val b = triplet._2; val c = triplet._3
 
